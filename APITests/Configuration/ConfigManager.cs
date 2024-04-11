@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using RestSharp;
 
 namespace ToptalAutomationTask.Configuration
 {
     public class ConfigManager
     {
         static IConfiguration _Configuration { get; set; }
-        static RestClient _RestClient { get; set; }
 
         static ConfigManager()
         {
@@ -14,13 +12,8 @@ namespace ToptalAutomationTask.Configuration
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             _Configuration = builder.Build();
-
-            _RestClient = new RestClient(_Configuration["BASE_URL"]);
         }
 
-        public static RestClient GetRestClient()
-        {
-            return _RestClient;
-        }
+        public static string BASE_URL => _Configuration["BASE_URL"];
     }
 }

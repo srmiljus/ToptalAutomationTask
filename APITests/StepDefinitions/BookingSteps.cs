@@ -1,25 +1,32 @@
 using APITests.Helpers;
 using APITests.Models;
+using BoDi;
 using Newtonsoft.Json;
 using RestSharp;
-using ToptalAutomationTask.Configuration;
 
 namespace APITests.StepDefinitions
 {
     [Binding]
-    public class BookingSteps 
+    public class BookingSteps
     {
         private RestResponse _response;
         private RestResponse _checkBookingIsDeleted;
         private BookingModel _bookingData;
         private string _token;
+        RestClient _restClient;
+        private readonly IObjectContainer _container;
 
-        public BookingSteps() { }
+        public BookingSteps(IObjectContainer container)
+        {
+            _container = container;
+            _restClient = _container.Resolve<RestClient>();
+        }
 
         [Given(@"Request body is prepared with valid data")]
         public void RequestBodyIsPreparedWithValidData()
         {
             _bookingData = DataHelper.CreateBookingData();
+
         }
 
         [Given(@"Request body is prepared with invalid data")]
@@ -32,7 +39,7 @@ namespace APITests.StepDefinitions
         [Given(@"Request is sent to GET a token")]
         public void RequestIsSentToGetAaToken()
         {
-            var response = ConfigManager.GetRestClient().CreateToken();
+            var response = RestHelper.CreateToken(_restClient);
             _token = DataHelper.GetTokenValueFromResponse(response);
         }
 
@@ -41,15 +48,15 @@ namespace APITests.StepDefinitions
         [Then(@"Request is sent to CREATE a booking")]
         public void RequestIsSentToCreateABooking()
         {
-            _response = ConfigManager.GetRestClient().CreateBooking(_bookingData);
+            _response = RestHelper.CreateBooking(_restClient, _bookingData);
         }
 
         [When(@"Request is sent to GET a booking")]
         public void RequestIsSentToGetABooking()
         {
-            var response = ConfigManager.GetRestClient().CreateBooking(_bookingData); 
+            var response = RestHelper.CreateBooking(_restClient, _bookingData);
             var bookingId = DataHelper.GetBookingIdFromCreateBookingResponse(response).ToString();
-            _response = ConfigManager.GetRestClient().GetBookingId(bookingId);
+            _response = RestHelper.GetBookingId(_restClient, bookingId);
         }
 
         [When(@"Request is sent to UPDATE a booking")]
@@ -57,15 +64,15 @@ namespace APITests.StepDefinitions
         {
             var bookingId = GetBookingId();
             _bookingData.additionalneeds = "Test";
-            _response = ConfigManager.GetRestClient().UpdateBooking(_bookingData, bookingId, _token);
+            _response = RestHelper.UpdateBooking(_restClient, _bookingData, bookingId, _token);
         }
         [Given(@"Request is sent to DELETE a booking")]
         [When(@"Request is sent to DELETE a booking")]
         public void RequestIsSentToDeleteABooking()
         {
             var bookingId = GetBookingId();
-            _response = ConfigManager.GetRestClient().DeleteBooking(bookingId, _token); 
-            _checkBookingIsDeleted = ConfigManager.GetRestClient().GetBookingId(bookingId);
+            _response = RestHelper.DeleteBooking(_restClient, bookingId, _token);
+            _checkBookingIsDeleted = RestHelper.GetBookingId(_restClient, bookingId);
         }
 
         [Given(@"Request is sent to GET a booking with id (.*)")]
@@ -73,7 +80,7 @@ namespace APITests.StepDefinitions
         [Given(@"Request is sent to GET a booking with id (.*)")]
         public void GivenRequestIsSentToGETABookingWithId(string bookingId)
         {
-            _response = ConfigManager.GetRestClient().GetBookingId(bookingId);
+            _response = RestHelper.GetBookingId(_restClient, bookingId);
         }
 
         [Then(@"Response should be (.*) and (.*)")]
@@ -100,7 +107,7 @@ namespace APITests.StepDefinitions
 
         private string GetBookingId()
         {
-            var bookingIdsResponse = ConfigManager.GetRestClient().GetBookingIds();
+            var bookingIdsResponse = RestHelper.GetBookingIds(_restClient);
             var bookingId = DataHelper.GetBookingIdFromGetBookingIdsResponse(bookingIdsResponse).ToString();
             return bookingId;
         }

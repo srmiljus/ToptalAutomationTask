@@ -11,7 +11,7 @@ namespace ToptalAutomationTask.Configuration
     public sealed class Hooks
     {
         IWebDriver _driver;
-        private readonly IObjectContainer _container; //ovo isto pregleadti//
+        private readonly IObjectContainer _container;
         private readonly ScenarioContext _scenarioContext;
         private readonly FeatureContext _featureContext;
         private static ExtentReports _extentReports;

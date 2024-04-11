@@ -23,6 +23,7 @@ namespace ToptalAutomationTask.Utilities
                     {
                         chromeOptions.AddArgument("--headless");
                         chromeOptions.AddArgument("--window-size=1920,1080");
+                        chromeOptions.AddArgument("--start-maximized");
                     }
                     driver = new ChromeDriver(chromeOptions);
                     break;

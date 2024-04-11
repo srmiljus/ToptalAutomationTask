@@ -6,7 +6,7 @@ namespace APITests.Helpers
     public static class RestHelper
     {
         //Request Authorization
-        public static RestResponse CreateToken(this RestClient restClient)
+        public static RestResponse CreateToken(RestClient restClient)
         {
             var request = new RestRequest("auth", Method.Post)
          .AddJsonBody(new TokenModel
@@ -20,7 +20,7 @@ namespace APITests.Helpers
 
         #region Booking
 
-        public static RestResponse GetBookingIds(this RestClient restClient)
+        public static RestResponse GetBookingIds(RestClient restClient)
         {
             var request = new RestRequest("booking", Method.Get)
            .AddHeader("Accept", "application/json")
@@ -29,7 +29,7 @@ namespace APITests.Helpers
             return restClient.Execute(request);
         }
 
-        public static RestResponse GetBookingId(this RestClient restClient, string bookingId)
+        public static RestResponse GetBookingId(RestClient restClient, string bookingId)
         {
             var request = new RestRequest($"booking/{bookingId}", Method.Get)
                    .AddHeader("Accept", "application/json")
@@ -38,17 +38,17 @@ namespace APITests.Helpers
             return restClient.Execute(request);
         }
 
-        public static RestResponse CreateBooking(this RestClient restClient, BookingModel body)
+        public static RestResponse CreateBooking(RestClient restClient, BookingModel body)
         {
             var request = new RestRequest("booking", Method.Post)
-                .AddHeader("Accept", "application/json")
-                .AddHeader("Content-Type", "application/json")
-                .AddJsonBody(body);
+                 .AddHeader("Accept", "application/json")
+                 .AddHeader("Content-Type", "application/json")
+                 .AddJsonBody(body);
 
             return restClient.Execute(request);
         }
 
-        public static RestResponse UpdateBooking(this RestClient restClient, BookingModel body, string bookingId, string tokenValue)
+        public static RestResponse UpdateBooking(RestClient restClient, BookingModel body, string bookingId, string tokenValue)
         {
             var request = new RestRequest($"booking/{bookingId}", Method.Put)
                  .AddHeader("Accept", "application/json")
@@ -59,7 +59,7 @@ namespace APITests.Helpers
             return restClient.Execute(request);
         }
 
-        public static RestResponse DeleteBooking(this RestClient restClient, string bookingId, string tokenValue)
+        public static RestResponse DeleteBooking(RestClient restClient, string bookingId, string tokenValue)
         {
             var request = new RestRequest($"booking/{bookingId}", Method.Delete)
                   .AddHeader("Accept", "application/json")
