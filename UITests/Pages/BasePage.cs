@@ -45,31 +45,31 @@ namespace ToptalAutomationTaskTests.Pages
             wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
-        public IWebElement WaitForElementToBeVisible(By element)
-        {
-            {
-                int attempts = 0;
-                while (attempts < 3)
-                {
-                    try
-                    {
-                        WebDriverWait wait = new WebDriverWait(_driver, _timeout);
-                        return wait.Until(ExpectedConditions.ElementIsVisible(element));
-                    }
-                    catch (NoSuchElementException)
-                    {
-                        _driver.Navigate().Refresh();
-                        attempts++;
-                    }
-                    catch (WebDriverTimeoutException)
-                    {
-                        _driver.Navigate().Refresh();
-                        attempts++;
-                    }
-                }
-                throw new NoSuchElementException($"Element is not visible after {attempts} attempts.");
-            }
-        }
+        //public IWebElement WaitForElementToBeVisible(By element)
+        //{
+        //    {
+        //        int attempts = 0;
+        //        while (attempts < 3)
+        //        {
+        //            try
+        //            {
+        //                WebDriverWait wait = new WebDriverWait(_driver, _timeout);
+        //                return wait.Until(ExpectedConditions.ElementIsVisible(element));
+        //            }
+        //            catch (NoSuchElementException)
+        //            {
+        //                _driver.Navigate().Refresh();
+        //                attempts++;
+        //            }
+        //            catch (WebDriverTimeoutException)
+        //            {
+        //                _driver.Navigate().Refresh();
+        //                attempts++;
+        //            }
+        //        }
+        //        throw new NoSuchElementException($"Element is not visible after {attempts} attempts.");
+        //    }
+        //}
     }
 }
 

@@ -16,7 +16,7 @@ namespace ToptalAutomationTask.Pages
 
 
         private IWebElement SearchBox => _driver.FindElement(By.XPath("//input[@id='search_query_top']"));
-        private By SearchBoxLocator => By.XPath("//input[@id='search_query_top']");
+        //private By SearchBoxLocator => By.XPath("//input[@id='search_query_top']");
         private IWebElement SearchButton => _driver.FindElement(By.XPath("//button[@name='submit_search']"));
         private IWebElement SearchResults => _driver.FindElement(By.XPath("//span[@class='heading-counter']"));
         private IList<IWebElement> ItemsFound => _driver.FindElements(By.XPath("//div[@class='product-image-container']"));
@@ -32,10 +32,10 @@ namespace ToptalAutomationTask.Pages
 
         #region Methods
 
-        public void WaitForPageToLoad()
-        {
-            WaitForElementToBeVisible(SearchBoxLocator);
-        }
+        //public void WaitForPageToLoad()
+        //{
+        //    WaitForElementToBeVisible(SearchBoxLocator);
+        //}
         public void SearchInSearchField(string searchWord)
         {
             TypeText(SearchBox, searchWord);
@@ -75,22 +75,8 @@ namespace ToptalAutomationTask.Pages
 
         public string GetAllertMessage()
         {
-            string text = GetText(AllertMessage);
-
-            if (text.Contains("\"") || text.Contains("\\"))
-            {
-
-                string cleanedText = text.Replace("\"", "");
-                cleanedText = cleanedText.Insert(cleanedText.IndexOf("search ") + 7, "\"");
-                cleanedText = cleanedText.Insert(cleanedText.Length, "\"");
-                Console.WriteLine(cleanedText);
-                return cleanedText;
-            }
-            else
-            {
-                Console.WriteLine(text);
-                return text;
-            }
+            return GetText(AllertMessage);
+           
         }
 
         public void ClickHeaderMenuButton(string button)

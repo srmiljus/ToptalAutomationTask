@@ -21,7 +21,7 @@ namespace ToptalAutomationTask.StepDefinitions
         public void GivenUserOpenedTheHomePage()
         {
             _homePage.GoToPage(ConfigManager.HomePageUrl);
-            _homePage.WaitForPageToLoad();
+            //_homePage.WaitForPageToLoad();
         }
 
         [When(@"User enter (.*) in search bar")]
@@ -80,9 +80,6 @@ namespace ToptalAutomationTask.StepDefinitions
         {
             _homePage.VerifySingleImage();
         }
-
-
-
 
     }
 }
