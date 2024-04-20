@@ -184,7 +184,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("User verify alert message There is 1 error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 24
- testRunner.Then("User verify reason for error Bad file extension", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("User verify reason for error Bad file extension", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -241,7 +241,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("User verify alert message There is 1 error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 35
- testRunner.Then("User verify reason for error Invalid email address.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("User verify reason for error Invalid email address.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -298,7 +298,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("User verify alert message There is 1 error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 46
- testRunner.Then("User verify reason for error Please select a subject from the list provided.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("User verify reason for error Please select a subject from the list provided.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -355,7 +355,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("User verify alert message There is 1 error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 57
- testRunner.Then("User verify reason for error The message cannot be blank.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("User verify reason for error The message cannot be blank.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

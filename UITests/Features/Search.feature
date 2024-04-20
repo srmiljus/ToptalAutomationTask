@@ -5,8 +5,9 @@ Scenario: 01 User search existing term by clicking on search button
 	Given User opened the home page
 	When User enter Printed Summer Dress in search bar
 	And User click on search button
-	And User can see message 7 results have been found.
-	Then User verify there is 7 items shown
+	Then User can see message 7 results have been found.
+	And User verify there is 7 items shown
+	But it should be 5 items with Dress on the page
 
 @smoke
 Scenario: 02 User search existing term by clicking on suggestion from dropdown

@@ -48,6 +48,14 @@ namespace APITests.Helpers
             return restClient.Execute(request);
         }
 
+        public static RestResponse CreateBookingWithoutHeader(this RestClient restClient, BookingModel body)
+        {
+            var request = new RestRequest("booking", Method.Post)
+                .AddJsonBody(body);
+
+            return restClient.Execute(request);
+        }
+
         public static RestResponse UpdateBooking(RestClient restClient, BookingModel body, string bookingId, string tokenValue)
         {
             var request = new RestRequest($"booking/{bookingId}", Method.Put)

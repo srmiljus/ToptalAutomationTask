@@ -21,7 +21,6 @@ namespace ToptalAutomationTask.StepDefinitions
         public void GivenUserOpenedTheHomePage()
         {
             _homePage.GoToPage(ConfigManager.HomePageUrl);
-            //_homePage.WaitForPageToLoad();
         }
 
         [When(@"User enter (.*) in search bar")]
@@ -31,7 +30,9 @@ namespace ToptalAutomationTask.StepDefinitions
 
         }
 
+        [Given(@"User can see message (.*)")]
         [When(@"User can see message (.*)")]
+        [Then(@"User can see message (.*)")]
         public void WhenUserCanSeeMessage(string expectedResults)
         {
             Assert.AreEqual(expectedResults, _homePage.GetNumberOfSearchResults());
@@ -79,6 +80,11 @@ namespace ToptalAutomationTask.StepDefinitions
         public void WhenUserCanSeePictureOfOnlyOneItem()
         {
             _homePage.VerifySingleImage();
+        }
+        [Then(@"it should be (.*) items with (.*) on the page")]
+        public void ThenItShouldBeItemsWithOnThePage(int expectedNumberOfItems, string expectedItem)
+        {
+            Assert.AreEqual(expectedNumberOfItems, _homePage.GetSearchedItemsCount(expectedItem));
         }
 
     }
