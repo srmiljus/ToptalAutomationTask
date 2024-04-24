@@ -2,6 +2,7 @@
 using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
 using OpenQA.Selenium;
+using RestSharp;
 using TechTalk.SpecFlow.Bindings;
 using ToptalAutomationTask.Utilities;
 
@@ -16,6 +17,7 @@ namespace ToptalAutomationTask.Configuration
         private readonly FeatureContext _featureContext;
         private static ExtentReports _extentReports;
         private ExtentTest _scenario;
+        private bool _isAPITest;
 
         public Hooks(IObjectContainer container, ScenarioContext scenarioContext, FeatureContext featureContext)
         {
@@ -34,29 +36,42 @@ namespace ToptalAutomationTask.Configuration
         [BeforeScenario]
         public void BeforeScenario()
         {
-            BrowserManager.KillBrowserDrivers();
+            _isAPITest = _scenarioContext.ScenarioInfo.Tags.Contains("api");
 
             var feature = _extentReports.CreateTest<Feature>(_featureContext.FeatureInfo.Title);
             _scenario = feature.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
 
-            _driver = BrowserManager.GetWebDriver();
-            _container.RegisterInstanceAs(_driver);
+            if (_isAPITest)
+            {
+                var restClient = new RestClient(ConfigManager.BASE_URL);
+                _container.RegisterInstanceAs(restClient);
+            }
+            else
+            {
+                BrowserManager.KillBrowserDrivers();
+
+                _driver = BrowserManager.GetWebDriver();
+                _container.RegisterInstanceAs(_driver);
+            }
 
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            var _driver = _container.Resolve<IWebDriver>();
-            _driver.Close();
-            _driver.Quit();
+            if (!_isAPITest)
+            {
+                var _driver = _container.Resolve<IWebDriver>();
+                _driver.Close();
+                _driver.Quit();
+            }
+
 
         }
 
         [AfterStep]
         public void AfterStep(IObjectContainer container)
         {
-            var _driver = container.Resolve<IWebDriver>();
 
             if (_scenarioContext.TestError == null)
             {
@@ -75,8 +90,9 @@ namespace ToptalAutomationTask.Configuration
                         break;
                 }
             }
-            else
+            else if (!_isAPITest)
             {
+                var _driver = container.Resolve<IWebDriver>();
                 var base64Screenshot = ExtentReportManager.CaptureScreenshot(_driver, _scenarioContext);
                 var mediaEntity = MediaEntityBuilder.CreateScreenCaptureFromBase64String(base64Screenshot).Build();
 
@@ -91,6 +107,23 @@ namespace ToptalAutomationTask.Configuration
                         break;
                     case StepDefinitionType.Then:
                         _scenario.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException, mediaEntity);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (_scenarioContext.StepContext.StepInfo.StepDefinitionType)
+                {
+                    case StepDefinitionType.Given:
+                        _scenario.CreateNode<Given>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
+                        break;
+                    case StepDefinitionType.When:
+                        _scenario.CreateNode<When>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
+                        break;
+                    case StepDefinitionType.Then:
+                        _scenario.CreateNode<Then>(_scenarioContext.StepContext.StepInfo.Text).Fail(_scenarioContext.TestError.InnerException);
                         break;
                     default:
                         break;

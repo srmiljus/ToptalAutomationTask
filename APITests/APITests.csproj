@@ -11,7 +11,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\UITests\Configuration\ConfigManager.cs" Link="ConfigManager.cs" />
+    <Compile Include="..\UITests\Configuration\Hooks.cs" Link="Hooks.cs" />
+    <Compile Include="..\UITests\Utilities\ExtentReportManager.cs" Link="ExtentReportManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\UITests\appsettings.json" Link="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="35.5.0" />
+    <PackageReference Include="ExtentReports" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
@@ -24,9 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\UITests\UITests.csproj" />
   </ItemGroup>
 
 </Project>

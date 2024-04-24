@@ -14,6 +14,7 @@ namespace ToptalAutomationTask.Configuration
         }
 
         public static string HomePageUrl => _Configuration["HomePageUrl"];
+        public static string BASE_URL => _Configuration["BASE_URL"];
         public static string Browser => _Configuration["Browser"];
         public static bool GetHeadless() => _Configuration.GetValue<bool>("Headless");
     }

@@ -26,8 +26,8 @@ namespace ToptalAutomationTask.Utilities
         }
         private static string CreateExtentReportPath()
         {
-            //string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            string reportsFolder = Path.Combine(Environment.CurrentDirectory, "Reports");
+            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+            string reportsFolder = Path.Combine(projectDirectory, "Reports");
 
             if (!Directory.Exists(reportsFolder))
             {

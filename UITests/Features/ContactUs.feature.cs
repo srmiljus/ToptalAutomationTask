@@ -124,7 +124,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("User send message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
- testRunner.Then("User verify success message Your message has been successfully sent to our team.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("User verify success message Your message has been successfully sent to our .", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

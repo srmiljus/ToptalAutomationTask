@@ -27,7 +27,7 @@ namespace ToptalAutomationTask.Pages
         private IList<IWebElement> NumberOfSearchedTerm(string term) => _driver.FindElements(By.XPath($"//div[@class='product-container']//h5[contains(.,'{term}')]"));
 
 
-        
+
 
         #endregion
 
@@ -73,7 +73,7 @@ namespace ToptalAutomationTask.Pages
         public string GetAllertMessage()
         {
             return GetText(AllertMessage);
-           
+
         }
 
         public void ClickHeaderMenuButton(string button)

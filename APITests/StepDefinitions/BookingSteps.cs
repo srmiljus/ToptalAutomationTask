@@ -54,7 +54,7 @@ namespace APITests.StepDefinitions
         [When(@"Request is sent to CREATE a booking without header")]
         public void WhenRequestIsSentToCREATEABookingWithoutHeader()
         {
-            _response = RestHelper.CreateBookingWithoutHeader(_restClient,_bookingData);
+            _response = RestHelper.CreateBookingWithoutHeader(_restClient, _bookingData);
         }
 
         [When(@"Request is sent to GET a booking")]
