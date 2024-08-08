@@ -9,7 +9,7 @@ Scenario: 01 User send a meesage with valid file
 	And User enter valid details for the form 
 	And User attach valid file 
 	And User send message
-	Then User verify success message Your message has been successfully sent to our.
+	Then User verify success message Your message has been successfully sent to our team.
 		
 @smoke
 Scenario: 02 User send a meesage with invalid file

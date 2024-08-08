@@ -151,7 +151,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("Request is sent to CREATE a booking", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 12
- testRunner.Then("Response should be 300 and InternalServerError", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Response should be 500 and InternalServerError", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
